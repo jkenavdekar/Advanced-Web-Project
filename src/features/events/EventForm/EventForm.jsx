@@ -61,6 +61,7 @@ export default function EventForm({match, history}) {
 
                         <FormField>
                             <Field name='category' placeholder='Category' as='select'>
+                                <option value="travel">None</option>
                                 <option value="travel">Travel</option>
                                 <option value="drinks">Drinks</option>
                                 <option value="food">Food</option>
