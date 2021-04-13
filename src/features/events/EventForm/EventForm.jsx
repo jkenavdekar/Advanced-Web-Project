@@ -1,8 +1,18 @@
 import cuid from 'cuid';
-import React, { useState } from 'react';
-import { Button, Form, Header, Segment} from 'semantic-ui-react';
+import { Field, Formik, Form, ErrorMessage } from 'formik';
+import React from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
+import { Button, FormField, Header, Segment} from 'semantic-ui-react';
+import { createEvent, updateEvent } from '../eventActions';
+import * as Yup from 'yup';
 
-export default function EventForm({setFormOpen, createEvent, selectedEvent, updateEvent}) {
+export default function EventForm({match, history}) {
+
+
+    const dispatch = useDispatch();
+
+    const selectedEvent = useSelector(state => state.event.events.find(e => e.id === match.params.id));
 
     const initialValues = selectedEvent ?? {
 
@@ -14,94 +24,84 @@ export default function EventForm({setFormOpen, createEvent, selectedEvent, upda
         date: ''
     }
 
-    const [values, setValues] = useState(initialValues);
+    const validationSchema = Yup.object({
+        title: Yup.string().required(),
+        category: Yup.string().required(),
+        description: Yup.string().required(),
+        city: Yup.string().required(),
+        venue: Yup.string().required(),
+        date: Yup.string().required()
 
-    function handleFormSubmit() {
+    })
 
-        selectedEvent ? updateEvent({...selectedEvent, ...values}) :
-        createEvent({
-            ...values, 
-            id: cuid(), 
-            hostedBy: 'Olivia', 
-            attendees: [], 
-            hostPhotoURL: '/assets/user.png'
-        });
-
-        setFormOpen(false);
-    }
-
-    function handleInputChange(e) {
-        const {name, value} = e.target;
-        setValues({...values, [name]: value });
-    }
 
     return(
         <Segment clearing>
             <Header content={selectedEvent ? 'Edit my event' : 'Create new event'} />
-                <Form onSubmit={handleFormSubmit} >
-                    <Form.Field>
-                        <input 
-                            type='text' 
-                            placeholder='Event title' 
-                            name='title'
-                            value={values.title}
-                            onChange={(e) => handleInputChange(e)}
-                        />
-                    </Form.Field>
+                <Formik initialValues={initialValues} validationSchema={validationSchema} onSubmit={values => {
+                    selectedEvent ? dispatch(updateEvent({...selectedEvent, ...values})) :
+                    dispatch(createEvent({
+                        ...values, 
+                        id: cuid(), 
+                        hostedBy: 'Olivia', 
+                        attendees: [], 
+                        hostPhotoURL: '/assets/user.png'
+                    }));
+            
+                    history.push('/events');
+                }} >
 
-                    <Form.Field>
-                        <input 
-                            type='text' 
-                            placeholder='Category' 
-                            name='category'
-                            value={values.category}
-                            onChange={(e) => handleInputChange(e)}
-                        />
-                    </Form.Field>
+                    {({ isSubmitting, dirty, isValid }) => (
 
-                    <Form.Field>
-                        <input 
-                            type='text' 
-                            placeholder='Description' 
-                            name='description'
-                            value={values.description}
-                            onChange={(e) => handleInputChange(e)}
-                        />
-                    </Form.Field>
+                        <Form className='ui form' >
+                        <FormField>
+                            <Field name='title' placeholder='Event title' />
+                            <ErrorMessage name='title' />
+                        </FormField>
 
-                    <Form.Field>
-                        <input 
-                            type='text' 
-                            placeholder='City'
-                            name='city'
-                            value={values.city}
-                            onChange={(e) => handleInputChange(e)}
-                        />
-                    </Form.Field>
+                        <FormField>
+                            <Field name='category' placeholder='Category' as='select'>
+                                <option value="travel">Travel</option>
+                                <option value="drinks">Drinks</option>
+                                <option value="food">Food</option>
+                                <option value="music">Music</option>
+                                <option value="culture">Culture</option>
+                                <option value="film">Film</option>
+                            </Field>
+                            <ErrorMessage name='category' />
+                        </FormField>
 
-                    <Form.Field>
-                        <input 
-                            type='text' 
-                            placeholder='Venue'
-                            name='venue'
-                            value={values.venue}
-                            onChange={(e) => handleInputChange(e)}
-                        />
-                    </Form.Field>
+                        <FormField>
+                            <Field name='description' placeholder='Description' as='textarea' />
+                            <ErrorMessage name='description' />
+                        </FormField>
 
-                    <Form.Field>
-                        <input 
-                            type='date' 
-                            placeholder='Date'
-                            name='date'
-                            value={values.date}
-                            onChange={(e) => handleInputChange(e)}
-                        />
-                    </Form.Field>
+                        <FormField>
+                            <Field name='city' placeholder='City' />
+                            <ErrorMessage name='city' />
+                        </FormField>
 
-                    <Button type='submit' floated='right' positive content='Submit' />
-                    <Button onClick={() => setFormOpen(false)} type='submit' floated='right' content='Cancel' />
-                </Form>
+                        <FormField>
+                            <Field name='venue' placeholder='Venue' />
+                            <ErrorMessage name='venue' />
+                        </FormField>
+
+                        <FormField>
+                            <Field name='date' placeholder='Event Date' type='date' />
+                            <ErrorMessage name='date' />
+                        </FormField>
+
+                        <Button 
+                        loading={isSubmitting} 
+                        disabled={!isValid || !dirty || isSubmitting} 
+                        type='submit' floated='right' positive content='Submit' />
+
+                        <Button disabled={isSubmitting} as={Link} to='/events' type='submit' floated='right' content='Cancel' />
+
+                        </Form>
+                    )}
+                    
+                </Formik>
         </Segment>
     
     )
