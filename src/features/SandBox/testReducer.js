@@ -1,3 +1,7 @@
+import { toast } from "react-toastify";
+import { asyncActionError, asyncActionFinish, asyncActionStart } from "../../app/async/asyncReducer";
+import { delay } from "../../app/common/util/util";
+
 const inc = 'increment';
 const dec = 'decrement';
 
@@ -5,19 +9,43 @@ const initialState = {
     data: 42
 }
 
+
 export function incAmout(amount) {
 
-    return {
-        type: inc,
-        payload: amount
+    return async function(dispatch) {
+
+        dispatch(asyncActionStart());
+        try {
+
+            await delay(1000);
+            dispatch({type: inc, payload: amount});
+            dispatch(asyncActionFinish());
+        } 
+        
+        catch (error) {
+
+            dispatch(asyncActionError(error))
+        }
     }
 }
 
 export function decAmout(amount) {
 
-    return {
-        type: dec,
-        payload: amount
+    return async function(dispatch) {
+
+        dispatch(asyncActionStart());
+        try {
+
+            await delay(1000);
+            dispatch({type: dec, payload: amount});
+            dispatch(asyncActionFinish());
+        } 
+        
+        catch (error) {
+
+            dispatch(asyncActionError(error))
+            toast.error(error);
+        }
     }
 }
 
