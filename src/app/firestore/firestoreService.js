@@ -1,3 +1,4 @@
+import cuid from 'cuid';
 import firebase from '../config/firebase';
 
 const db = firebase.firestore();
@@ -22,8 +23,40 @@ export function dataFromSnapshot(snapshot) {
     };
 }
 
+export function listenToEventsFromFirestore() {
 
-export function getEventsFromFirestore(observer) {
+    return db.collection('events').orderBy('date');
+}
 
-    return db.collection('events').onSnapshot(observer);
+export function listenToSingleEventFromFirestore(eventID) {
+
+  return db.collection('events').doc(eventID);
+}
+
+export function addEventToFirestore(event) {
+  return db.collection('events').add({
+      ...event,
+      hostedBy: 'Olivia',
+      hostPhotoURL: 'https://randomuser.me/api/portraits/women/20.jpg',
+      attendees: firebase.firestore.FieldValue.arrayUnion({
+          id: cuid(),
+          displayName: 'Olivia',
+          photoURL: 'https://randomuser.me/api/portraits/women/20.jpg'
+        })
+
+      });
+}
+
+export function updateEventInFirestore(event) {
+  return db.collection('events').doc(event.id).update(event);
+}
+
+export function deleteEventInFirestore(eventId) {
+  return db.collection('events').doc(eventId).delete();
+}
+
+export function cancelEventToggle(event) {
+  return db.collection('events').doc(event.id).update({
+    isCancelled: !event.isCancelled
+  });
 }
