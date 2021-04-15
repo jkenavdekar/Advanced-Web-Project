@@ -2,10 +2,10 @@ import React from 'react';
 import ModalWrapper from '../../app/common/modals/ModalWrapper';
 import { Formik, Form, ErrorMessage, Field } from 'formik';
 import * as Yup from 'yup';
-import { Button } from 'semantic-ui-react';
+import { Button, Label } from 'semantic-ui-react';
 import { useDispatch } from 'react-redux';
-import { signInUser } from './authActions';
 import { closeModal } from '../../app/common/modals/modalReducer';
+import { signInWithEmail } from '../../app/firestore/firebaseService';
 
 export default function LoginForm() {
 
@@ -20,13 +20,20 @@ export default function LoginForm() {
                     password: Yup.string().required()
                 })}
 
-                onSubmit={ (values, {setSubmitting}) => {
-                    dispatch(signInUser(values))
-                    setSubmitting(false)
-                    dispatch(closeModal())
+                onSubmit={ async (values, {setSubmitting, setErrors}) => {
+
+                    try {
+                        await signInWithEmail(values);
+                        setSubmitting(false);
+                        dispatch(closeModal());
+                    }
+                    catch(error){
+                        setErrors({auth: 'username or password does not exist!'});
+                        setSubmitting(false);
+                    }
                 }}
             >
-                {({isSubmitting, isValid, dirty}) => (
+                {({isSubmitting, isValid, dirty, errors}) => (
 
                     <Form className='ui form'>
 
@@ -36,6 +43,8 @@ export default function LoginForm() {
                         <Field name='password' placeholder='Password' type='password' />
                             <ErrorMessage name='email' />
                         
+                        {errors.auth && <Label basic color='red' style={{marginBottom: 10}} content={errors.auth} />}
+
                         <Button 
                             loading={isSubmitting}
                             disabled={!isValid || !dirty || isSubmitting}
