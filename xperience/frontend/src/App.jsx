@@ -37,8 +37,7 @@ export default App
 */
 
 function App() {
-  const [users, setUsers] = useState([]);
-  const [events, setEvents] = useState([]);
+
   const getData = async () => {
     const res = await axios.get("/api/users");
     setUsers(res.data);
