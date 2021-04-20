@@ -38,17 +38,6 @@ export default App
 
 function App() {
 
-  const getData = async () => {
-    const res = await axios.get("/api/users");
-    setUsers(res.data);
-
-    const res2 = await axios.get("/api/events");
-    setEvents(res2.data);
-  };
-
-  useEffect(() => {
-    getData();
-  }, []);
 
   const classes = useStyles();
 
