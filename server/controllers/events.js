@@ -1,3 +1,4 @@
+import mongoose from 'mongoose';
 import EventMessage from "../models/eventMessage.js";
 
 
@@ -26,4 +27,19 @@ export const createEvent = async (req, res) => {
     catch (error) {
         res.status(409).json({ message: error.message });
     }
+}
+
+export const updateEvent = async (req, res) => {
+
+    const { id } = req.params;
+
+    const { title, category, description, city, venue, date } = req.body;
+    
+    if (!mongoose.Types.ObjectId.isValid(id)) return res.status(404).send(`No post with id: ${id}`);
+
+    const updatedEvent = { title, category, description, city, venue, date, _id: id };
+
+    await EventMessage.findByIdAndUpdate(id, updatedPost, { new: true });
+
+    res.json(updatedEvent);
 }
