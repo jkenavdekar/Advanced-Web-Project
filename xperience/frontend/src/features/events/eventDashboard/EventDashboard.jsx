@@ -23,12 +23,13 @@ export default function EventDashboard() {
         setfilterEvent(new Map(filterEvent.set(key, value)))
     }
 
-    
+    /*
+
     useFirestoreCollection({
         query: () => listenToEventsFromFirestore(),
         data: events => dispatch(listenToEvents(events)),
         deps: [dispatch]
-    })
+    })*/
     
     
     //console.log(events);
@@ -37,11 +38,11 @@ export default function EventDashboard() {
         <Grid>
             <GridColumn width={10}>
                 <EventList events={events} />
-                {/*
+                
                 {events.map((post) => (
                     <EventListItem event={post} key={post._id} />
                 ))}
-                */}
+                
             </GridColumn>
 
             <GridColumn width={6}>

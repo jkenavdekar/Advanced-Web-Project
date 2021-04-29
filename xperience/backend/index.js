@@ -12,7 +12,7 @@ app.use(cors());
 
 app.use('/posts', posts);
 
-const CONNECTION_URL = 'mongodb+srv://Jay:itsmydatabase@cluster0.ntoce.mongodb.net/myFirstDatabase?retryWrites=true&w=majority';
+const CONNECTION_URL = 'mongodb+srv://Olivia:olish585@cluster0.ntoce.mongodb.net/myFirstDatabase?retryWrites=true&w=majority';
 
 //const databaseName = 'Xperience';
 //const connection_d = `mongodb://127.0.0.1:27017/${databaseName}`;

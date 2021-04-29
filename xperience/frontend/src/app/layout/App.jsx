@@ -20,12 +20,12 @@ function App() {
 
   const {key} = useLocation();
 
-  /*
+  
   const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(loadEvents());
-  }, [dispatch]); */
+  }, [dispatch]); 
 
   return (
     <>
