@@ -1,24 +1,33 @@
 import { CREATE_EVENT, DELETE_EVENT, FETCH_EVENTS, UPDATE_EVENT } from "./eventConstants";
-import { asyncActionStart, asyncActionFinish, asyncActionError } from '../../app/async/asyncReducer';
-import { fetchSampleData } from "../../app/api/mockApi";
+//import { asyncActionStart, asyncActionFinish, asyncActionError } from '../../app/async/asyncReducer';
+//import { fetchSampleData } from "../../app/api/mockApi";
+import * as api from '../../api/index.js';
+
 
 export function loadEvents() {
-
     return async function(dispatch) {
-
-        dispatch(asyncActionStart());
         try {
-
-            const events = await fetchSampleData();
-            dispatch({type: FETCH_EVENTS, payload: events});
-            dispatch(asyncActionFinish());
-        } 
+            const { data } = await api.fetchPosts();
         
+            dispatch({ type: FETCH_EVENTS, payload: data });
+        }
         catch (error) {
-
-            dispatch(asyncActionError(error));
+            console.log(error.message);
         }
     }
+}
+
+export function createPost(post) {
+    return async function(dispatch) {
+    try {
+        const { data } = await api.createPost(post);
+        dispatch({ type: CREATE_EVENT, payload: data });
+    } 
+    
+    catch (error) {
+      console.log(error.message);
+    }
+  }
 }
 
 
