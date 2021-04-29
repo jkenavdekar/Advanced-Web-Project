@@ -3,7 +3,6 @@ import { useSelector } from 'react-redux';
 import { Link, useHistory } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { Dropdown, Image, Menu } from 'semantic-ui-react';
-import { signOutFirebase } from '../../app/firestore/firebaseService';
 
 export default function SignedInMenu() {
 
@@ -12,7 +11,7 @@ export default function SignedInMenu() {
 
     async function handleSignOut() {
         try{
-            await signOutFirebase();
+           // await signOutFirebase();
             history.push('/');
         }
         catch(error){

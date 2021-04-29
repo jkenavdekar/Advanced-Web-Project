@@ -5,8 +5,6 @@ import { Link } from 'react-router-dom';
 import { Button, Confirm, FormField, Header, Loader, Segment} from 'semantic-ui-react';
 import { listenToEvents } from '../eventActions';
 import * as Yup from 'yup';
-import useFirestoreDoc from '../../../app/hooks/useFirestoreDoc';
-import { addEventToFirestore, listenToSingleEventFromFirestore, updateEventInFirestore, cancelEventToggle } from '../../../app/firestore/firestoreService';
 import { toast } from 'react-toastify';
 
 export default function EventForm({match, history}) {
@@ -43,21 +41,21 @@ export default function EventForm({match, history}) {
     async function handleCancelEvent(event) {
         setConfirmOpen(false);
         try {
-          await cancelEventToggle(event);
+         // await cancelEventToggle(event);
         } 
         catch (error) {
           toast.error(error.message);
         }
       }
 
-
+/*
     useFirestoreDoc({
         query: () => listenToSingleEventFromFirestore(match.params.id),
         data: event => dispatch(listenToEvents([event])),
         deps: [match.params.id, dispatch],
         shouldExecute: !!match.params.id
       });
-    
+    */
 
     if(loading) return <Loader content='Loading your event...' /> 
 
@@ -74,7 +72,7 @@ export default function EventForm({match, history}) {
 
                         try {
                             console.log(values);
-                            selectedEvent ? await updateEventInFirestore(values) : await addEventToFirestore(values);
+                           // selectedEvent ? await updateEventInFirestore(values) : await addEventToFirestore(values);
                             setSubmitting(false);
                             history.push('/events');
                         }

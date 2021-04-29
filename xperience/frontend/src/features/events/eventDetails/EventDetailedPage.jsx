@@ -1,8 +1,6 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Grid, Loader } from 'semantic-ui-react';
-import { listenToSingleEventFromFirestore } from '../../../app/firestore/firestoreService';
-import useFirestoreDoc from '../../../app/hooks/useFirestoreDoc';
 import { listenToEvents } from '../eventActions';
 import EventDetailedChat from './EventDetailedChat';
 import EventDetailedHeader from './EventDetailedHeader';
@@ -22,12 +20,6 @@ export default function EventDetailedPage({match}) {
     const isHost = event?.hostUid === currentUser?.uid;
 
     const isGoing = event?.attendees?.some((a) => a.id === currentUser?.uid);
-
-    useFirestoreDoc({
-        query: () => listenToSingleEventFromFirestore(match.params.id),
-        data: (event) => dispatch(listenToEvents([event])),
-        deps: [match.params.id, dispatch],
-      });
 
     if(loading || !event) return <Loader content='Loading your event...' /> 
 

@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import {Segment, Header, Image, Item, Button} from 'semantic-ui-react';
-import { addAttendee, cancelAttendee } from '../../../app/firestore/firestoreService';
 
 const eventImageStyle = {
     filter: 'brightness(30%)'
@@ -24,7 +23,7 @@ export default function EventDetailedHeader({event, isHost, isGoing}) {
     async function joinEvent() {
         setLoad(true);
         try {
-            await addAttendee(event);
+            //await addAttendee(event);
             setLoad(false);
         }
         catch(error) {
@@ -36,7 +35,7 @@ export default function EventDetailedHeader({event, isHost, isGoing}) {
     async function cancelEvent() {
         setLoad(true);
         try {
-            await cancelAttendee(event);
+            //await cancelAttendee(event);
             setLoad(false);
         }
         catch(error) {
