@@ -1,9 +1,6 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 import { Grid, Loader } from 'semantic-ui-react';
-import { listenToSingleEventFromFirestore } from '../../../app/firestore/firestoreService';
-import useFirestoreDoc from '../../../app/hooks/useFirestoreDoc';
-import { listenToEvents, loadEvents } from '../eventActions';
 import EventDetailedChat from './EventDetailedChat';
 import EventDetailedHeader from './EventDetailedHeader';
 import EventDetailedInfo from './EventDetailedInfo';
@@ -22,16 +19,6 @@ export default function EventDetailedPage({match}) {
     const isGoing = event?.attendees?.some((a) => a._id === user?.result._id);
     console.log(isGoing);
 
-    /*
-
-    useFirestoreDoc({
-        query: () => listenToSingleEventFromFirestore(match.params.id),
-        data: (event) => dispatch(listenToEvents([event])),
-        deps: [match.params.id, dispatch],
-      });
-
-    
-    */
     if(loading || !event) return <Loader content='Loading your event...' /> 
 
     if (error) return <Loader content='Cannot find the document!' /> 

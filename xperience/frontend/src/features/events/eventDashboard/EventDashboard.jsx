@@ -3,9 +3,6 @@ import { Grid, GridColumn } from 'semantic-ui-react';
 import EventList from './EventList';
 import { useDispatch, useSelector } from 'react-redux';
 import EventFilters from './EventFilters';
-import { listenToEventsFromFirestore } from '../../../app/firestore/firestoreService';
-import { listenToEvents, loadEvents } from '../eventActions';
-import useFirestoreCollection from '../../../app/hooks/useFirestoreCollection';
 
 export default function EventDashboard() {
 
