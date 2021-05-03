@@ -1,7 +1,8 @@
 {
-  "name": "frontend",
+  "name": "evento",
   "version": "0.1.0",
   "private": true,
+  "proxy": "http://localhost:5000",
   "dependencies": {
     "@testing-library/jest-dom": "^5.11.10",
     "@testing-library/react": "^11.2.6",
@@ -11,12 +12,14 @@
     "express": "^4.17.1",
     "firebase": "^8.4.1",
     "formik": "^2.2.6",
+    "jwt-decode": "^3.1.2",
     "react": "^17.0.2",
     "react-calendar": "^3.3.1",
     "react-dom": "^17.0.2",
+    "react-google-login": "^5.2.2",
     "react-redux": "^7.2.3",
     "react-router-dom": "^5.2.0",
-    "react-scripts": "^4.0.3",
+    "react-scripts": "4.0.3",
     "react-toastify": "^7.0.3",
     "redux": "^4.0.5",
     "redux-thunk": "^2.3.0",
@@ -51,6 +54,5 @@
   },
   "devDependencies": {
     "redux-devtools-extension": "^2.13.9"
-  },
-  "proxy": "http://localhost:5000"
+  }
 }

@@ -3,11 +3,12 @@ import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { Button, Confirm, FormField, Header, Loader, Segment} from 'semantic-ui-react';
-import { listenToEvents } from '../eventActions';
+import { createPost, listenToEvents, updatePost } from '../eventActions';
 import * as Yup from 'yup';
 import useFirestoreDoc from '../../../app/hooks/useFirestoreDoc';
 import { addEventToFirestore, listenToSingleEventFromFirestore, updateEventInFirestore, cancelEventToggle } from '../../../app/firestore/firestoreService';
 import { toast } from 'react-toastify';
+import * as api from '../../../api/index.js';
 
 export default function EventForm({match, history}) {
 
@@ -16,9 +17,25 @@ export default function EventForm({match, history}) {
 
     const [confirmOpen, setConfirmOpen] = useState(false);
 
-    const selectedEvent = useSelector(state => state.event.events.find(e => e.id === match.params.id));
+    const selectedEvent = useSelector(state => state.event.events.find(e => e._id === match.params.id));
+    //console.log(selectedEvent?.title);
 
     const { loading, error } = useSelector((state) => state.async);
+
+    var eSelect = null;
+
+    async function handle() {
+        const { data } = await api.fetchPosts();
+        data.forEach(p => {
+            if(p.title === selectedEvent?.title) {
+                //console.log(p._id);
+                eSelect = p._id;
+            }
+           });
+    }
+    handle();
+
+    const [user, setUser] = useState(JSON.parse(localStorage.getItem('profile')));
 
     const initialValues = selectedEvent ?? {
 
@@ -27,7 +44,9 @@ export default function EventForm({match, history}) {
         description: '',
         city: '',
         venue: '',
-        date: ''
+        date: '',
+        hostUid: user.result._id,
+        hostedBy: user.result.displayName
     }
 
     const validationSchema = Yup.object({
@@ -50,7 +69,7 @@ export default function EventForm({match, history}) {
         }
       }
 
-
+    /*
     useFirestoreDoc({
         query: () => listenToSingleEventFromFirestore(match.params.id),
         data: event => dispatch(listenToEvents([event])),
@@ -62,7 +81,7 @@ export default function EventForm({match, history}) {
     if(loading) return <Loader content='Loading your event...' /> 
 
     if (error) return <Loader content='Cannot find the document!' /> 
-
+    */
 
     return(
         <Segment clearing>
@@ -74,7 +93,8 @@ export default function EventForm({match, history}) {
 
                         try {
                             console.log(values);
-                            selectedEvent ? await updateEventInFirestore(values) : await addEventToFirestore(values);
+                            selectedEvent ? dispatch(updatePost(eSelect, values)) : dispatch(createPost(values));
+                            //selectedEvent ? await updateEventInFirestore(values) : await addEventToFirestore(values);
                             setSubmitting(false);
                             history.push('/events');
                         }

@@ -6,8 +6,9 @@ import { Button, Label } from 'semantic-ui-react';
 import { useDispatch } from 'react-redux';
 import { closeModal } from '../../app/common/modals/modalReducer';
 import { registerInFirebase } from '../../app/firestore/firebaseService';
+import { signup } from './authActions';
 
-export default function RegisterForm() {
+export default function RegisterForm({history}) {
 
     const dispatch = useDispatch();
 
@@ -25,7 +26,8 @@ export default function RegisterForm() {
                 onSubmit={ async (values, {setSubmitting, setErrors}) => {
 
                     try {
-                        await registerInFirebase(values);
+                        dispatch(signup(values));
+                        //await registerInFirebase(values);
                         setSubmitting(false);
                         dispatch(closeModal());
                     }

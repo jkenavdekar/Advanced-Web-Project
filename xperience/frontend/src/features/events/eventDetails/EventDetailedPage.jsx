@@ -1,9 +1,9 @@
 import React from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { Grid, Loader } from 'semantic-ui-react';
 import { listenToSingleEventFromFirestore } from '../../../app/firestore/firestoreService';
 import useFirestoreDoc from '../../../app/hooks/useFirestoreDoc';
-import { listenToEvents } from '../eventActions';
+import { listenToEvents, loadEvents } from '../eventActions';
 import EventDetailedChat from './EventDetailedChat';
 import EventDetailedHeader from './EventDetailedHeader';
 import EventDetailedInfo from './EventDetailedInfo';
@@ -11,17 +11,18 @@ import EventDetailedSidebar from './EventDetailedSidebar';
 
 export default function EventDetailedPage({match}) {
 
-    const dispatch = useDispatch();
-
-    const { currentUser } = useSelector((state) => state.auth);
-
-    const event = useSelector(state => state.event.events.find(e => e.id === match.params.id));
+    const event = useSelector(state => state.event.events.find(e => e._id === match.params.id));
 
     const { loading, error } = useSelector((state) => state.async);
 
-    const isHost = event?.hostUid === currentUser?.uid;
+    const user = JSON.parse(localStorage.getItem('profile'));
 
-    const isGoing = event?.attendees?.some((a) => a.id === currentUser?.uid);
+    const isHost = event?.hostUid === user?.result._id;
+
+    const isGoing = event?.attendees?.some((a) => a._id === user?.result._id);
+    console.log(isGoing);
+
+    /*
 
     useFirestoreDoc({
         query: () => listenToSingleEventFromFirestore(match.params.id),
@@ -29,9 +30,12 @@ export default function EventDetailedPage({match}) {
         deps: [match.params.id, dispatch],
       });
 
+    
+    */
     if(loading || !event) return <Loader content='Loading your event...' /> 
 
     if (error) return <Loader content='Cannot find the document!' /> 
+
 
     return(
         <Grid>

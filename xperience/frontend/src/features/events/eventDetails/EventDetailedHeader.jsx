@@ -76,7 +76,7 @@ export default function EventDetailedHeader({event, isHost, isGoing}) {
                     (<Button onClick={joinEvent} loading={load} color="teal">JOIN THIS EVENT</Button>) }
                 </>)}
 
-                { isHost && (<Button as={Link} to={`/manage/${event.id}`} color="orange" floated="right"> Manage Event </Button>) }
+                { isHost && (<Button as={Link} to={`/manage/${event._id}`} color="orange" floated="right"> Manage Event </Button>)}
 
             </Segment>
         </Segment.Group>

@@ -55,7 +55,7 @@ export function addEventToFirestore(event) {
 
 
 export function updateEventInFirestore(event) {
-  console.log(event);
+  //console.log(event);
   return db.collection('events').doc(event.id).update(event);
 }
 
@@ -103,4 +103,9 @@ export async function cancelAttendee(event) {
     catch (error) {
       throw error;
     }
+}
+
+
+export function getUserProfile(userId) {
+  return db.collection('users').doc(userId);
 }

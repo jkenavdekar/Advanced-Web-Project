@@ -10,6 +10,7 @@ const eventSchema = mongoose.Schema({
     date: String,
     city: String,
     hostedBy: String,
+    hostUid: String,
     hostPhotoURL: String,
 })
 

@@ -1,4 +1,4 @@
-import { SIGN_IN_USER, SIGN_OUT_USER } from "./authConstants";
+import { SIGN_IN_USER, SIGN_OUT_USER, SIGN_UP_USER } from "./authConstants";
 
 const initialState = {
     authenticated: false,
@@ -23,12 +23,17 @@ export default function authReducer(state = initialState, { type, payload }) {
             };
 
         case SIGN_OUT_USER:
+            localStorage.clear();
             return {
             ...state,
             authenticated: false,
             currentUser: null,
             };
 
+        case SIGN_UP_USER:
+            console.log(payload);
+            localStorage.setItem('profile', JSON.stringify({ ...payload }));
+            return { ...state, authenticated: true, currentUser: payload };
         default:
             return state;
     }

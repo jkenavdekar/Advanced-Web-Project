@@ -5,10 +5,10 @@ import thunk from 'redux-thunk';
 import { verifyAuth } from '../../features/authentication/authActions';
 
 export function configureStore() {
-
+    
     const store = createStore(rootReducer,composeWithDevTools(applyMiddleware(thunk)))
 
-    store.dispatch(verifyAuth())
+    //store.dispatch(verifyAuth())
 
     return store
 }

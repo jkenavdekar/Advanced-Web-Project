@@ -6,12 +6,12 @@ import 'firebase/storage';
 
 const firebaseConfig = {
 
-    apiKey: "AIzaSyB-l5dVEkZMWlteqlQPurLdOj63anitU1U",
-    authDomain: "xperince-c85b0.firebaseapp.com",
-    projectId: "xperince-c85b0",
-    storageBucket: "xperince-c85b0.appspot.com",
-    messagingSenderId: "432825110620",
-    appId: "1:432825110620:web:498ccee698968b96d21699"
+    apiKey: "AIzaSyAz4iq5FK4GfJiu9GO75k5w5QvtwgrEPc4",
+    authDomain: "xperiencenew.firebaseapp.com",
+    projectId: "xperiencenew",
+    storageBucket: "xperiencenew.appspot.com",
+    messagingSenderId: "1004632287878",
+    appId: "1:1004632287878:web:988fe7e7a39a40d14d3f07"
 }
 
 firebase.initializeApp(firebaseConfig);

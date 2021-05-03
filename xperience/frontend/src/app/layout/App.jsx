@@ -15,18 +15,17 @@ import ModalManager from '../common/modals/ModalManager';
 import PostForm from '../../features/events/EventForm/PostForm';
 import { useDispatch } from 'react-redux';
 import { loadEvents } from '../../features/events/eventActions';
+import ProfilePage from '../../features/profile/ProfilePage';
 
 function App() {
 
   const {key} = useLocation();
-
-  
   const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(loadEvents());
-  }, [dispatch]); 
-
+  }, [dispatch]);
+  
   return (
     <>
       <ModalManager/>
@@ -43,6 +42,7 @@ function App() {
             <Route path='/events/:id' component={EventDetailedPage} />
             <Route path={['/createEvent', '/manage/:id']} component={EventForm} key={key} />
             <Route path='/account' component={AccountPage} />
+            <Route path='/profile/:id' component={ProfilePage} />
         </Container>
         
         </>

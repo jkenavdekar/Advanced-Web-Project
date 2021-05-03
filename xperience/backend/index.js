@@ -3,6 +3,7 @@ import mongoose from 'mongoose';
 import cors from 'cors';
 import bodyParser from 'body-parser';
 import posts from './routes/posts.js';
+import users from './routes/users.js';
 
 const app = express();
 
@@ -11,8 +12,9 @@ app.use(bodyParser.urlencoded({limit: "30mb", extended: true}));
 app.use(cors());
 
 app.use('/posts', posts);
+app.use('/user', users);
 
-const CONNECTION_URL = 'mongodb+srv://Olivia:olish585@cluster0.ntoce.mongodb.net/myFirstDatabase?retryWrites=true&w=majority';
+const CONNECTION_URL = 'mongodb+srv://Jay:itsmydatabase@cluster0.ntoce.mongodb.net/myFirstDatabase?retryWrites=true&w=majority';
 
 //const databaseName = 'Xperience';
 //const connection_d = `mongodb://127.0.0.1:27017/${databaseName}`;

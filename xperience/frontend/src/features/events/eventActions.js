@@ -30,6 +30,35 @@ export function createPost(post) {
   }
 }
 
+export function updatePost(id, post) {
+    return async function(dispatch) {
+        
+        try {
+            console.log(id);
+            console.log(post);
+            const { data } = await api.updatePost(id, post);
+        
+            dispatch({ type: UPDATE_EVENT, payload: post });
+        } 
+        catch (error) {
+            console.log(error);
+        }
+    }
+}
+
+export function deletePost(id) {
+    return async function(dispatch) {
+        try {
+            await api.deletePost(id);
+            dispatch({ type: DELETE_EVENT, payload: id });
+            console.log(id);
+        } 
+        catch (error) {
+            console.log(error);
+        }
+    }
+
+}
 
 export function listenToEvents(events) {
     return{

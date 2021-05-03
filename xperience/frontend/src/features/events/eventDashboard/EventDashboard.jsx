@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { Grid, GridColumn } from 'semantic-ui-react';
 import EventList from './EventList';
 import { useDispatch, useSelector } from 'react-redux';
@@ -6,7 +6,6 @@ import EventFilters from './EventFilters';
 import { listenToEventsFromFirestore } from '../../../app/firestore/firestoreService';
 import { listenToEvents, loadEvents } from '../eventActions';
 import useFirestoreCollection from '../../../app/hooks/useFirestoreCollection';
-import EventListItem from './EventListItem';
 
 export default function EventDashboard() {
 
@@ -24,25 +23,20 @@ export default function EventDashboard() {
     }
 
     /*
-
     useFirestoreCollection({
         query: () => listenToEventsFromFirestore(),
         data: events => dispatch(listenToEvents(events)),
         deps: [dispatch]
-    })*/
+    })
     
+    */
     
-    //console.log(events);
+    console.log(events);
    
     return(
         <Grid>
             <GridColumn width={10}>
-                <EventList events={events} />
-                
-                {events.map((post) => (
-                    <EventListItem event={post} key={post._id} />
-                ))}
-                
+                <EventList events={events} loading={loading} />
             </GridColumn>
 
             <GridColumn width={6}>

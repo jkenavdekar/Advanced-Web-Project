@@ -16,7 +16,9 @@ export default function EventForm({history}) {
         description: '',
         city: '',
         venue: '',
-        date: ''
+        date: '',
+        hostUid: '22',
+        hostedBy: 'Diana'
     });
 
     return(
@@ -26,6 +28,7 @@ export default function EventForm({history}) {
                 <Formik initialValues={postData} onSubmit={ async (values, { setSubmitting }) => {
 
                         try {
+                            console.log(values);
                             dispatch(createPost(values));
                             setSubmitting(false);
                             history.push('/events');
