@@ -60,6 +60,23 @@ export function deletePost(id) {
 
 }
 
+
+export function addAttendee(id, post) {
+    return async function(dispatch) {
+        
+        try {
+            console.log(id);
+            console.log(post);
+            const { data } = await api.addAttendee(id, post);
+        
+            dispatch({ type: UPDATE_EVENT, payload: data });
+        } 
+        catch (error) {
+            console.log(error);
+        }
+    }
+}
+
 export function listenToEvents(events) {
     return{
         type: FETCH_EVENTS,

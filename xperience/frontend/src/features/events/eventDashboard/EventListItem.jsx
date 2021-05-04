@@ -40,9 +40,11 @@ export default function EventListItem({event, loading}) {
 
     <Segment secondary clearing>
       <List horizontal >
+        {/*
         {event.attendees.map((attendee) => (
           <EventAttendee key={attendee.id} attendee={attendee} />
         ))}
+        */}
       </List>
     </Segment>
 

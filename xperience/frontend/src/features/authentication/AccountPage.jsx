@@ -2,6 +2,7 @@ import React from 'react';
 import { Segment, Header, Button, Label } from 'semantic-ui-react';
 import { Formik, Form, ErrorMessage, Field } from 'formik';
 import * as Yup from 'yup';
+import { updateUserPassword } from '../../app/firestore/firebaseService';
 
 export default function AccountPage() {
 
@@ -20,7 +21,7 @@ export default function AccountPage() {
 
                     onSubmit= {async (values, {setSubmitting, setErrors}) => {
                         try {
-                           // await updateUserPassword(values);
+                            await updateUserPassword(values);
                             setSubmitting(false);
                         }
                         catch(error) {

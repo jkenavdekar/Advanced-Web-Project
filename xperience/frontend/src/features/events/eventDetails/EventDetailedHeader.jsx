@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
+import { useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import {Segment, Header, Image, Item, Button} from 'semantic-ui-react';
+import { addAttendee } from '../eventActions';
 
 const eventImageStyle = {
     filter: 'brightness(30%)'
@@ -20,9 +22,13 @@ export default function EventDetailedHeader({event, isHost, isGoing}) {
 
     const [load, setLoad] = useState(false);
 
+    const dispatch = useDispatch();
+    const user = JSON.parse(localStorage.getItem('profile'));
+
     async function joinEvent() {
         setLoad(true);
         try {
+            dispatch(addAttendee(event._id, user.result.displayName));
             //await addAttendee(event);
             setLoad(false);
         }
@@ -35,6 +41,7 @@ export default function EventDetailedHeader({event, isHost, isGoing}) {
     async function cancelEvent() {
         setLoad(true);
         try {
+            console.log(event.attendees);
             //await cancelAttendee(event);
             setLoad(false);
         }

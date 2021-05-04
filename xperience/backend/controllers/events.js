@@ -15,9 +15,9 @@ export const getEvents = async (req, res) => {
 
 
 export const createEvent = async (req, res) => {
-    const { title, description, category, venue, date, hostedBy, city, hostUid } = req.body;
+    const { title, description, category, venue, date, hostedBy, city, hostUid, attendees } = req.body;
 
-    const newEvent = new EventMessage({ title, description, category, venue, date, hostedBy, city, hostUid })
+    const newEvent = new EventMessage({ title, description, category, venue, date, hostedBy, city, hostUid, attendees })
 
     try {
         await newEvent.save();
@@ -52,4 +52,18 @@ export const deleteEvent = async (req, res) => {
     await EventMessage.findByIdAndRemove(id);
 
     res.json({ message: "Post deleted successfully." });
+}
+
+
+export const addAttendee = async (req, res) => {
+
+    const { id } = req.params;
+
+    console.log(req.body);
+
+    if (!mongoose.Types.ObjectId.isValid(id)) return res.status(404).send(`No post with id: ${id}`);
+
+    const updatedPost = await EventMessage.findByIdAndUpdate(id, { $addToSet:{attendees: req.body}, }, { new: true });
+    
+    res.json(updatedPost);
 }
