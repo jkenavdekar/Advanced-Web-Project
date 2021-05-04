@@ -1,5 +1,5 @@
 import express from 'express';
-import { createEvent, getEvents, updateEvent, deleteEvent, addAttendee } from '../controllers/events.js';
+import { createEvent, getEvents, updateEvent, deleteEvent, addAttendee, cancelAttendee } from '../controllers/events.js';
 import auth from '../middleware/auth.js';
 
 const router = express.Router();
@@ -9,5 +9,6 @@ router.post('/', createEvent);
 router.patch('/:id', updateEvent);
 router.delete('/:id', deleteEvent);
 router.patch('/:id/addAttendee', addAttendee);
+router.patch('/:id/cancelAttendee', cancelAttendee);
 
 export default router;

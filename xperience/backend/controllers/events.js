@@ -67,3 +67,17 @@ export const addAttendee = async (req, res) => {
     
     res.json(updatedPost);
 }
+
+
+export const cancelAttendee = async (req, res) => {
+
+    const { id } = req.params;
+
+    console.log(req.body);
+
+    if (!mongoose.Types.ObjectId.isValid(id)) return res.status(404).send(`No post with id: ${id}`);
+
+    const updatedPost = await EventMessage.findByIdAndUpdate(id, { $pull:{attendees: req.body}, }, { new: true });
+    
+    res.json(updatedPost);
+}
