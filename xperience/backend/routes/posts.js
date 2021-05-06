@@ -5,10 +5,10 @@ import auth from '../middleware/auth.js';
 const router = express.Router();
 
 router.get('/', getEvents);
-router.post('/', createEvent);
-router.patch('/:id', updateEvent);
-router.delete('/:id', deleteEvent);
-router.patch('/:id/addAttendee', addAttendee);
-router.patch('/:id/cancelAttendee', cancelAttendee);
+router.post('/', auth, createEvent);
+router.patch('/:id', auth, updateEvent);
+router.delete('/:id', auth, deleteEvent);
+router.patch('/:id/addAttendee', auth, addAttendee);
+router.patch('/:id/cancelAttendee', auth, cancelAttendee);
 
 export default router;

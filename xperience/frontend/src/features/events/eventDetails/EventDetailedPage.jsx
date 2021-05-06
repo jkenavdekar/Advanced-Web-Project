@@ -19,7 +19,7 @@ export default function EventDetailedPage({match}) {
     const isHost = event?.hostUid === user?.result._id;
 
     const isGoing = event?.attendees?.some((a) => a === user?.result.displayName);
-    console.log(event.attendees);
+    //console.log(event.attendees);
 
  
     if(loading || !event) return <Loader content='Loading your event...' /> 

@@ -1,3 +1,7 @@
+# 📹Mid Course Screencast
+https://youtu.be/BQoPHBGjFqs
+
+
 # 🏖Xperience
 
 ## Functional and technical specification
