@@ -1,8 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Button, Icon, Item, Label, List, Loader, Segment } from 'semantic-ui-react';
-import EventAttendee from './EventAttendee';
-import { deleteEventInFirestore } from '../../../app/firestore/firestoreService';
 import { useDispatch } from 'react-redux';
 import { deletePost } from '../eventActions';
 

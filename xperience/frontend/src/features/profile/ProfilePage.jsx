@@ -1,8 +1,6 @@
 import React from 'react';
 import { Segment, Grid, Item, Header } from 'semantic-ui-react';
 import { useDispatch, useSelector } from 'react-redux';
-import useFirestoreDoc from '../../app/hooks/useFirestoreDoc';
-import { getUserProfile } from '../../app/firestore/firestoreService';
 import { listenToCurrentUserProfile } from './profileActions';
 
 export default function ProfilePage({match}) {
@@ -13,12 +11,7 @@ export default function ProfilePage({match}) {
     const { loading, error } = useSelector((state) => state.async);
     console.log(match.params.id);
 
-    useFirestoreDoc({
 
-        query: () => getUserProfile(match.params.id),
-        data: profile => dispatch(listenToCurrentUserProfile(profile)),
-        deps: [dispatch, match.params.id],
-    });
 
     return(
         <Segment>
