@@ -81,7 +81,7 @@ export default function EventForm({match, history}) {
                             console.log(values);
                             selectedEvent ? dispatch(updatePost(eSelect, values)) : dispatch(createPost(values));
                             setSubmitting(false);
-                            history.push('/events');
+                            history.push('/');
                         }
 
                         catch(error) {
@@ -136,7 +136,7 @@ export default function EventForm({match, history}) {
                         disabled={!isValid || !dirty || isSubmitting} 
                         type='submit' floated='right' positive content='Submit' />
 
-                        <Button disabled={isSubmitting} as={Link} to='/events' type='submit' floated='right' content='Cancel' />
+                        <Button disabled={isSubmitting} as={Link} to='/' type='submit' floated='right' content='Cancel' />
 
                         {selectedEvent && ( <Button type='button' floated='left'
                                 color= {selectedEvent.isCancelled ? 'green' : 'red'}

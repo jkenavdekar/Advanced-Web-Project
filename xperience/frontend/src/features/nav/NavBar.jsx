@@ -18,7 +18,7 @@ export default function NavBar({setFormOpen}) {
                     Xperince
                 </Menu.Item>
 
-                <Menu.Item as={NavLink} to='/events' name='Events'/>
+                <Menu.Item as={NavLink} to='/' name='Events'/>
 
                 {/* <Menu.Item as={NavLink} to='/sanbox' name='Sanbox'/> */}
                 <Menu.Item as={NavLink} to='/posts' name='Post'/> 
