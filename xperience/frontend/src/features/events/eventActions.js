@@ -77,6 +77,20 @@ export function addAttendee(id, post) {
     }
 }
 
+export function cancelAttendee(id, post) {
+    return async function(dispatch) {
+        
+        try {
+            const { data } = await api.cancelAttendee(id, post);
+        
+            dispatch({ type: UPDATE_EVENT, payload: data });
+        } 
+        catch (error) {
+            console.log(error);
+        }
+    }
+}
+
 export function listenToEvents(events) {
     return{
         type: FETCH_EVENTS,
