@@ -9,7 +9,6 @@ import reportWebVitals from './reportWebVitals';
 import { BrowserRouter } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import { configureStore } from './app/Store/configureStore';
-import { loadEvents } from './features/events/eventActions';
 
 const store = configureStore();
 
