@@ -5,7 +5,6 @@ import * as Yup from 'yup';
 import { Button, Label } from 'semantic-ui-react';
 import { useDispatch } from 'react-redux';
 import { closeModal } from '../../app/common/modals/modalReducer';
-import { signInWithEmail } from '../../app/firestore/firebaseService';
 import { signin } from './authActions';
 
 export default function LoginForm() {

@@ -3,9 +3,6 @@ import { Grid, GridColumn } from 'semantic-ui-react';
 import EventList from './EventList';
 import { useDispatch, useSelector } from 'react-redux';
 import EventFilters from './EventFilters';
-import { listenToEventsFromFirestore } from '../../../app/firestore/firestoreService';
-import { listenToEvents, loadEvents } from '../eventActions';
-import useFirestoreCollection from '../../../app/hooks/useFirestoreCollection';
 
 export default function EventDashboard() {
 
@@ -22,14 +19,6 @@ export default function EventDashboard() {
         setfilterEvent(new Map(filterEvent.set(key, value)))
     }
 
-    /*
-    useFirestoreCollection({
-        query: () => listenToEventsFromFirestore(),
-        data: events => dispatch(listenToEvents(events)),
-        deps: [dispatch]
-    })
-    
-    */
     
     console.log(events);
    

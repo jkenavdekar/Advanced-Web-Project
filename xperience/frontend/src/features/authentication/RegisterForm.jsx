@@ -5,7 +5,6 @@ import * as Yup from 'yup';
 import { Button, Label } from 'semantic-ui-react';
 import { useDispatch } from 'react-redux';
 import { closeModal } from '../../app/common/modals/modalReducer';
-import { registerInFirebase } from '../../app/firestore/firebaseService';
 import { signup } from './authActions';
 
 export default function RegisterForm({history}) {
@@ -27,7 +26,6 @@ export default function RegisterForm({history}) {
 
                     try {
                         dispatch(signup(values));
-                        //await registerInFirebase(values);
                         setSubmitting(false);
                         dispatch(closeModal());
                     }
