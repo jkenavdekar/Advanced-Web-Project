@@ -20,7 +20,6 @@ export default function NavBar({setFormOpen}) {
 
                 <Menu.Item as={NavLink} to='/' name='Events'/>
 
-                <Menu.Item as={NavLink} to='/posts' name='Post'/> 
 
                 {(authenticated || user) && 
                 <Menu.Item as={NavLink} to='/createEvent' >

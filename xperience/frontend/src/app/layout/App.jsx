@@ -10,7 +10,6 @@ import EventDetailedPage from '../../features/events/eventDetails/EventDetailedP
 import EventForm from '../../features/events/EventForm/EventForm';
 import NavBar from '../../features/nav/NavBar';
 import ModalManager from '../common/modals/ModalManager';
-import PostForm from '../../features/events/EventForm/PostForm';
 import { useDispatch } from 'react-redux';
 import { loadEvents } from '../../features/events/eventActions';
 import ProfilePage from '../../features/profile/ProfilePage';
@@ -39,7 +38,6 @@ function App() {
         <>
           <NavBar />
           <Container className='main'>
-            <Route exact path='/posts' component={PostForm} />
             <Route path='/:id' component={EventDetailedPage} />
             <Route path={['/createEvent', '/manage/:id']} component={EventForm} key={key} />
             <Route path='/account' component={AccountPage} />
