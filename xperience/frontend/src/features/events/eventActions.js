@@ -22,11 +22,14 @@ export function loadEvents() {
             const filter = localStorage.getItem("eventFilter");
             console.log(filter);
 
+            const user = JSON.parse(localStorage.getItem('profile'));
+            console.log(user.result.displayName);
+
             switch(filter) {
 
                 case 'isGoing':
                     const newData1 = data.filter(function(e) {
-                        return e.attendees.includes("Jenny");
+                        return e.attendees.includes(user.result.displayName);
                     });
                     console.log(newData1);
                     dispatch({ type: FETCH_EVENTS, payload: newData1 });
@@ -34,7 +37,7 @@ export function loadEvents() {
 
                 case 'isHosting':
                     const newData2 = data.filter(function(e) {
-                        return e.hostedBy === "Jenny";
+                        return e.hostedBy === user.result.displayName;
                     });
                     dispatch({ type: FETCH_EVENTS, payload: newData2 });
                     break;
