@@ -12,7 +12,7 @@ We are going to create a social media application for creating and hosting event
 - Create an account. 
 - Log in and log out.
 - Create an event. 
-- Delete an event that they created.
+- Cancel an event that they created.
 - Comment on events.
 - See a feed of current events.
 - Users should be able to sign up for events.
