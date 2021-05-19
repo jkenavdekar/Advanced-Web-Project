@@ -10,7 +10,7 @@ export function loadEvents() {
             const { data } = await api.fetchPosts();
 
             data.sort(function(a,b){
-                return new Date(b.date) - new Date(a.date);
+                return new Date(a.date) - new Date(b.date);
             });
 
             console.log(data);

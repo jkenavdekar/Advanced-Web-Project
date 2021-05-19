@@ -48,7 +48,6 @@ export default function EventListItem({event, loading}) {
 
     <Segment clearing>
       <div> {event.description} </div>
-      <Button onClick={() => dispatch(deletePost(event._id))} color='red' floated='right' content='Delete'/>
       <Button as={Link} to={`/${event._id}`} color='teal' floated='right' content='View'/>
     </Segment>
 

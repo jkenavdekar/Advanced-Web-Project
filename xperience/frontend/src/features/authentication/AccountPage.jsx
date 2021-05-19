@@ -43,7 +43,7 @@ export default function AccountPage() {
                 {({ errors, isSubmitting, isValid, dirty }) => (
                     <Form className='ui form'>
                         
-                        <Field name='newPassword1' type='text' placeholder='New Password'  />
+                        <Field name='newPassword1' type='password' placeholder='New Password'  />
                             <ErrorMessage name='newPassword1' />
                             <Divider hidden />
 
