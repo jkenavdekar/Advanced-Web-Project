@@ -13,14 +13,13 @@ export default function NavBar({setFormOpen}) {
     return (
         <Menu inverted fixed='top'>
             <Container>
-                <Menu.Item as={NavLink} exact to='/' header>
+                <Menu.Item  header>
                     <img src="/assets/logo.png" alt="logo" style={{marginRight: 15}}/>
                     Xperince
                 </Menu.Item>
 
-                <Menu.Item as={NavLink} to='/events' name='Events'/>
+                <Menu.Item as={NavLink} to='/' name='Events'/>
 
-                {/* <Menu.Item as={NavLink} to='/sanbox' name='Sanbox'/> */}
 
                 {(authenticated || user) && 
                 <Menu.Item as={NavLink} to='/createEvent' >

@@ -31,7 +31,7 @@ export default function EventForm({history}) {
                             console.log(values);
                             dispatch(createPost(values));
                             setSubmitting(false);
-                            history.push('/events');
+                            history.push('/');
                         }
 
                         catch(error) {
