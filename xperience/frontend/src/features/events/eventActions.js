@@ -13,7 +13,11 @@ export function loadEvents() {
                 return new Date(b.date) - new Date(a.date);
             });
 
-            console.log(data);
+            const newDates = data.filter(function(e) {
+                return new Date(e.date) >= new Date();
+            });
+
+            console.log(newDates);
 
             const filter = localStorage.getItem("eventFilter");
             console.log(filter);
@@ -36,7 +40,7 @@ export function loadEvents() {
                     break;
 
                 default:
-                    dispatch({ type: FETCH_EVENTS, payload: data });
+                    dispatch({ type: FETCH_EVENTS, payload: newDates });
             }
             
         }

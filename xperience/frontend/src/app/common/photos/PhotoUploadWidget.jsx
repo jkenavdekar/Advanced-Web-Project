@@ -26,7 +26,7 @@ export default function PhotoUploadWidget({userID}) {
             }
             setLoading(false);
             handleCancelCrop();
-            //document.location.reload();
+            document.location.reload();
         }
         catch(error) {
             toast.error(error.message);
