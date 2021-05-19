@@ -12,6 +12,8 @@ const eventSchema = mongoose.Schema({
     hostedBy: String,
     hostUid: String,
     hostPhotoURL: String,
+    isCancelled: Boolean,
+    comments: [{displayName: String, description: String, date: String}],
 })
 
 var EventMessage = mongoose.model('EventMessage', eventSchema);

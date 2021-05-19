@@ -8,8 +8,37 @@ export function loadEvents() {
     return async function(dispatch) {
         try {
             const { data } = await api.fetchPosts();
-        
-            dispatch({ type: FETCH_EVENTS, payload: data });
+
+            data.sort(function(a,b){
+                return new Date(b.date) - new Date(a.date);
+            });
+
+            console.log(data);
+
+            const filter = localStorage.getItem("eventFilter");
+            console.log(filter);
+
+            switch(filter) {
+
+                case 'isGoing':
+                    const newData1 = data.filter(function(e) {
+                        return e.attendees.includes("Jenny");
+                    });
+                    console.log(newData1);
+                    dispatch({ type: FETCH_EVENTS, payload: newData1 });
+                    break;
+
+                case 'isHosting':
+                    const newData2 = data.filter(function(e) {
+                        return e.hostedBy === "Jenny";
+                    });
+                    dispatch({ type: FETCH_EVENTS, payload: newData2 });
+                    break;
+
+                default:
+                    dispatch({ type: FETCH_EVENTS, payload: data });
+            }
+            
         }
         catch (error) {
             console.log(error.message);
@@ -65,9 +94,8 @@ export function addAttendee(id, post) {
     return async function(dispatch) {
         
         try {
-            console.log(id);
-            console.log(post);
             const { data } = await api.addAttendee(id, post);
+            console.log(data);
         
             dispatch({ type: UPDATE_EVENT, payload: data });
         } 
@@ -91,6 +119,36 @@ export function cancelAttendee(id, post) {
     }
 }
 
+export function addComment(id, post) {
+    return async function(dispatch) {
+        
+        try {
+            const { data } = await api.addComment(id, post);
+            console.log(data);
+            dispatch({ type: UPDATE_EVENT, payload: data });
+        } 
+        catch (error) {
+            console.log(error);
+        }
+    }
+}
+
+export function toggleEvent(id, post) {
+    return async function(dispatch) {
+        
+        try {
+            console.log(post);
+            const { data } = await api.toggleEvent(id, post);
+            dispatch({ type: UPDATE_EVENT, payload: data });
+        } 
+        catch (error) {
+            console.log(error);
+        }
+    }
+}
+
+
+///////////////////////////////////////////////
 export function listenToEvents(events) {
     return{
         type: FETCH_EVENTS,

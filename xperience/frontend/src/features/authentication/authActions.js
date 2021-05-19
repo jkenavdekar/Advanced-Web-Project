@@ -43,3 +43,15 @@ export const signin = (formData) => async (dispatch) => {
     console.log(error);
   }
 }
+
+export const updatePass = (id, pass) => async (dispatch) => {
+  try {
+    const { data } = await api.updatePassword(id, pass);
+
+    dispatch({ type: SIGN_UP_USER , payload: data });
+  } 
+  
+  catch (error) {
+    console.log(error);
+  }
+}

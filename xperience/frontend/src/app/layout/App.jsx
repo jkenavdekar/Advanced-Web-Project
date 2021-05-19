@@ -16,6 +16,7 @@ import PostForm from '../../features/events/EventForm/PostForm';
 import { useDispatch } from 'react-redux';
 import { loadEvents } from '../../features/events/eventActions';
 import ProfilePage from '../../features/profile/ProfilePage';
+import PhotosTab from '../../features/profile/PhotoTab';
 
 function App() {
 
@@ -38,11 +39,11 @@ function App() {
           <Container className='main'>
             <Route exact path='/events' component={EventDashboard} />
             <Route exact path='/sanbox' component={Sanbox} />
-            <Route exact path='/posts' component={PostForm} />
             <Route path='/events/:id' component={EventDetailedPage} />
             <Route path={['/createEvent', '/manage/:id']} component={EventForm} key={key} />
             <Route path='/account' component={AccountPage} />
             <Route path='/profile/:id' component={ProfilePage} />
+            <Route path='/profile/photo/:id' component={PhotosTab} />
         </Container>
         
         </>

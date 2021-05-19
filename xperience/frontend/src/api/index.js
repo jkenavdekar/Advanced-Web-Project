@@ -17,6 +17,10 @@ export const updatePost = (id, updatedPost) => API.patch(`/posts/${id}`, updated
 export const deletePost = (id) => API.delete(`/posts/${id}`);
 export const addAttendee = (id, updatedPost) => API.patch(`/posts/${id}/addAttendee`, updatedPost);
 export const cancelAttendee = (id, updatedPost) => API.patch(`/posts/${id}/cancelAttendee`, updatedPost);
+export const addComment = (id, updatedPost) => API.patch(`/posts/${id}/addComment`, updatedPost);
+export const toggleEvent = (id, updatedPost) => API.patch(`/posts/${id}/toggleEvent`, updatedPost);
 
 export const signIn = (formData) => API.post('/user/signin', formData);
 export const signUp = (formData) => API.post('/user/signup', formData);
+export const addPhoto = (id, updatePhoto) => API.patch(`/user/${id}/addPhoto`, updatePhoto);
+export const updatePassword = (id, updatePass) => API.patch(`/user/${id}/updatePassword`, updatePass);

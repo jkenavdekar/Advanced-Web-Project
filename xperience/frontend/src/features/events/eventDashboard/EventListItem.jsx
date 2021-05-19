@@ -21,7 +21,7 @@ export default function EventListItem({event, loading}) {
             <Item.Description>
                 Hosted by {event.hostedBy}
             </Item.Description>
-            {event.isCancelled && ( 
+            {event?.isCancelled && ( 
               <Label style={{top: '-40px'}} ribbon='right' color='red' content='This event has been cancelled' />
               )}
           </Item.Content>

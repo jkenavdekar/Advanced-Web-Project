@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { Button, Confirm, FormField, Header, Loader, Segment} from 'semantic-ui-react';
-import { createPost, listenToEvents, updatePost } from '../eventActions';
+import { createPost, toggleEvent, updatePost } from '../eventActions';
 import * as Yup from 'yup';
 import { toast } from 'react-toastify';
 import * as api from '../../../api/index.js';
@@ -43,8 +43,10 @@ export default function EventForm({match, history}) {
         city: '',
         venue: '',
         date: '',
+        time: '',
         hostUid: user.result._id,
-        hostedBy: user.result.displayName
+        hostedBy: user.result.displayName,
+        isCancelled: false
     }
 
     const validationSchema = Yup.object({
@@ -60,7 +62,7 @@ export default function EventForm({match, history}) {
     async function handleCancelEvent(event) {
         setConfirmOpen(false);
         try {
-          //await cancelEventToggle(event);
+          dispatch(toggleEvent(event._id, !event.isCancelled));
         } 
         catch (error) {
           toast.error(error.message);
@@ -117,7 +119,7 @@ export default function EventForm({match, history}) {
                         </FormField>
 
                         <FormField>
-                            <Field name='city' placeholder='City' />
+                            <Field name='city' placeholder='City' option />
                             <ErrorMessage name='city' />
                         </FormField>
 
@@ -129,6 +131,10 @@ export default function EventForm({match, history}) {
                         <FormField>
                             <Field name='date' placeholder='Event Date' type='date' />
                             <ErrorMessage name='date' />
+                        </FormField>
+
+                        <FormField>
+                            <Field name='time' placeholder='Event Time' type='time' />
                         </FormField>
 
                         <Button 

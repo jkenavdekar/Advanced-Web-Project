@@ -1,12 +1,11 @@
 import React, { useState } from 'react';
 import { Grid, GridColumn } from 'semantic-ui-react';
 import EventList from './EventList';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import EventFilters from './EventFilters';
 
 export default function EventDashboard() {
 
-    const dispatch = useDispatch();
     const {events} = useSelector((state) => state.event);
     const {loading} = useSelector((state) => state.async);
 
@@ -19,8 +18,7 @@ export default function EventDashboard() {
         setfilterEvent(new Map(filterEvent.set(key, value)))
     }
 
-    
-    console.log(events);
+    //console.log(events);
    
     return(
         <Grid>

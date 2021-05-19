@@ -7,9 +7,11 @@ import { SIGN_OUT_USER } from '../authentication/authConstants';
 
 export default function SignedInMenu() {
 
-    const {currentUser} = useSelector((state) => state.auth);
+    const {currentUserProfile} = useSelector((state) => state.profile);
 
     const [user, setUser] = useState(JSON.parse(localStorage.getItem('profile')));
+
+    const photo = localStorage.getItem("userPhoto");
 
     const dispatch = useDispatch();
 
@@ -28,11 +30,11 @@ export default function SignedInMenu() {
 
     return(
         <Menu.Item position='right'>
-            <Image avatar spaced='right' src={user?.result.photoURL || '/assets/user.png'} />
-            <Dropdown pointing='top left' text={user?.result.displayName} >
+            <Image avatar spaced='right' src={ user?.result?.photoURL || photo || '/assets/user.png'} />
+            <Dropdown pointing='top left' text={user?.result?.displayName || user?.result?.name} >
                 <Dropdown.Menu>
                     <Dropdown.Item as={Link} to='/createEvent' text='Create Event' icon='plus' />
-                    <Dropdown.Item as={Link} to={`/profile/${user?.result._id}`} text='My Profile' icon='user' />
+                    <Dropdown.Item as={Link} to={`/profile/${user?.result._id || user?.result?.googleId}`} text='My Profile' icon='user' />
                     <Dropdown.Item as={Link} to='/account' text='My Account' icon='settings' />
                     <Dropdown.Item 
                     onClick={handleSignOut}

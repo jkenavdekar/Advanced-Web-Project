@@ -34,6 +34,7 @@ export default function authReducer(state = initialState, { type, payload }) {
             console.log(payload);
             localStorage.setItem('profile', JSON.stringify({ ...payload }));
             return { ...state, authenticated: true, currentUser: payload };
+        
         default:
             return state;
     }

@@ -32,7 +32,7 @@ export default function EventDetailedPage({match}) {
             <Grid.Column width={10}>
                 <EventDetailedHeader event={event} isHost={isHost} isGoing={isGoing} />
                 <EventDetailedInfo event={event} />
-                {/* <EventDetailedChat /> */}
+                <EventDetailedChat event={event} />
             </Grid.Column>
 
             <Grid.Column width={6}>

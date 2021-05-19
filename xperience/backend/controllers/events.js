@@ -5,7 +5,7 @@ import EventMessage from "../models/eventMessage.js";
 export const getEvents = async (req, res) => {
     try {
         const eventMessages = await EventMessage.find();
-                
+        //eventMessages.sort({date: 1})
         res.status(200).json(eventMessages);
     } 
     catch (error) {
@@ -15,9 +15,9 @@ export const getEvents = async (req, res) => {
 
 
 export const createEvent = async (req, res) => {
-    const { title, description, category, venue, date, hostedBy, city, hostUid, attendees } = req.body;
+    const { title, description, category, venue, date, hostedBy, city, hostUid, attendees, isCancelled } = req.body;
 
-    const newEvent = new EventMessage({ title, description, category, venue, date, hostedBy, city, hostUid, attendees })
+    const newEvent = new EventMessage({ title, description, category, venue, date, hostedBy, city, hostUid, attendees, isCancelled })
 
     try {
         await newEvent.save();
@@ -77,6 +77,34 @@ export const cancelAttendee = async (req, res) => {
     if (!mongoose.Types.ObjectId.isValid(id)) return res.status(404).send(`No post with id: ${id}`);
 
     const updatedPost = await EventMessage.findByIdAndUpdate(id, { $pull:{attendees: req.body[0]}, }, { new: true });
+    
+    res.json(updatedPost);
+}
+
+
+export const addComment = async (req, res) => {
+
+    const { id } = req.params;
+
+    console.log(req.body);
+
+    if (!mongoose.Types.ObjectId.isValid(id)) return res.status(404).send(`No post with id: ${id}`);
+
+    const updatedPost = await EventMessage.findByIdAndUpdate(id, { $push:{comments: req.body}, }, { new: true });
+    
+    res.json(updatedPost);
+}
+
+
+export const toggleEvent = async (req, res) => {
+
+    const { id } = req.params;
+
+    console.log(Object.keys(req.body)[0]);
+
+    if (!mongoose.Types.ObjectId.isValid(id)) return res.status(404).send(`No post with id: ${id}`);
+
+    const updatedPost = await EventMessage.findByIdAndUpdate(id, { isCancelled: Object.keys(req.body)[0] }, { new: true });
     
     res.json(updatedPost);
 }

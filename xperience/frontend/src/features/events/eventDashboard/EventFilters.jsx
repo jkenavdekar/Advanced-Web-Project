@@ -1,8 +1,30 @@
 import React from 'react';
 import { Menu, Header } from 'semantic-ui-react';
 import { Calendar } from 'react-calendar';
+import { useDispatch } from 'react-redux';
+import { loadEvents } from '../eventActions';
 
 export default function EventFilters({filterEvent, setfilterEvent, loading}) {
+
+        const dispatch = useDispatch();
+
+        function handleAll() {
+            setfilterEvent('filter', 'all')
+            localStorage.setItem("eventFilter", filterEvent.get('filter'));
+            dispatch(loadEvents());
+        }
+
+        function handleisGoing() {
+            setfilterEvent('filter', 'isGoing')
+            localStorage.setItem("eventFilter", filterEvent.get('filter'));
+            dispatch(loadEvents());
+        }
+
+        function handleisHosting() {
+            setfilterEvent('filter', 'isHosting')
+            localStorage.setItem("eventFilter", filterEvent.get('filter'));
+            dispatch(loadEvents());
+        }
 
         return (
             <>
@@ -12,17 +34,17 @@ export default function EventFilters({filterEvent, setfilterEvent, loading}) {
 
                     <Menu.Item content='All Events'
                         active={filterEvent.get('filter') === 'all'}
-                        onClick={() => setfilterEvent('filter', 'all')}
+                        onClick={handleAll}
                         disabled={loading} />
 
                     <Menu.Item content="I'm going"
                         active={filterEvent.get('filter') === 'isGoing'}
-                        onClick={() => setfilterEvent('filter', 'isGoing')}
+                        onClick={handleisGoing}
                         disabled={loading} />
 
                     <Menu.Item content="I'm hosting"
                         active={filterEvent.get('filter') === 'isHosting'}
-                        onClick={() => setfilterEvent('filter', 'isHosting')}
+                        onClick={handleisHosting}
                         disabled={loading} />
                     
                 </Menu>
