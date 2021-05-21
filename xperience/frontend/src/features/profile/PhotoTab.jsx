@@ -9,7 +9,7 @@ export default function PhotosTab({match}) {
         <Tab.Pane>
         <Grid>
             <Grid.Column width={16}>
-                <Header floated='left' icon='user' content={`Photos`} />
+                <Header floated='left' icon='user' content={`Photo`} />
             </Grid.Column>
 
             <Grid.Column width={16}>

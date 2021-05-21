@@ -1,8 +1,6 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 import { Grid, Loader } from 'semantic-ui-react';
-
-import { listenToEvents, loadEvents } from '../eventActions';
 import EventDetailedChat from './EventDetailedChat';
 import EventDetailedHeader from './EventDetailedHeader';
 import EventDetailedInfo from './EventDetailedInfo';
@@ -36,7 +34,7 @@ export default function EventDetailedPage({match}) {
             </Grid.Column>
 
             <Grid.Column width={6}>
-                <EventDetailedSidebar attendees={event?.attendees} />
+                <EventDetailedSidebar event={event} />
             </Grid.Column>
         </Grid>
     )

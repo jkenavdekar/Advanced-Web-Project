@@ -30,7 +30,7 @@ export default function SignedInMenu() {
 
     return(
         <Menu.Item position='right'>
-            <Image avatar spaced='right' src={ user?.result?.photoURL || photo || '/assets/user.png'} />
+            <Image avatar spaced='right' src={ photo || user?.result?.photoURL || '/assets/user.png'} />
             <Dropdown pointing='top left' text={user?.result?.displayName || user?.result?.name} >
                 <Dropdown.Menu>
                     <Dropdown.Item as={Link} to='/createEvent' text='Create Event' icon='plus' />

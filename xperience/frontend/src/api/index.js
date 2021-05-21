@@ -2,6 +2,8 @@ import axios from 'axios';
 
 const API = axios.create({ baseURL: 'http://localhost:5001' });
 
+//const API = axios.create({ baseURL: 'https://xperince-project.herokuapp.com/' });
+
 
 API.interceptors.request.use((req) => {
     if (localStorage.getItem('profile')) {
@@ -19,6 +21,8 @@ export const addAttendee = (id, updatedPost) => API.patch(`/posts/${id}/addAtten
 export const cancelAttendee = (id, updatedPost) => API.patch(`/posts/${id}/cancelAttendee`, updatedPost);
 export const addComment = (id, updatedPost) => API.patch(`/posts/${id}/addComment`, updatedPost);
 export const toggleEvent = (id, updatedPost) => API.patch(`/posts/${id}/toggleEvent`, updatedPost);
+export const updatePhoto = (id, updatePhoto) => API.patch(`/posts/${id}/updatePhoto`, updatePhoto);
+export const updateCount = (id, updateCount) => API.patch(`/posts/${id}/updateCount`, updateCount);
 
 export const signIn = (formData) => API.post('/user/signin', formData);
 export const signUp = (formData) => API.post('/user/signup', formData);

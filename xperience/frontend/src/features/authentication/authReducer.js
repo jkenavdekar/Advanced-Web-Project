@@ -24,6 +24,7 @@ export default function authReducer(state = initialState, { type, payload }) {
 
         case SIGN_OUT_USER:
             localStorage.clear();
+            console.log('Signed Out Successfully!');
             return {
             ...state,
             authenticated: false,

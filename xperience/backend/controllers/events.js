@@ -15,9 +15,9 @@ export const getEvents = async (req, res) => {
 
 
 export const createEvent = async (req, res) => {
-    const { title, description, category, venue, date, hostedBy, city, hostUid, attendees, isCancelled } = req.body;
+    const { title, description, category, venue, date, time, hostedBy, city, hostUid, attendees, isCancelled, hostPhotoURL } = req.body;
 
-    const newEvent = new EventMessage({ title, description, category, venue, date, hostedBy, city, hostUid, attendees, isCancelled })
+    const newEvent = new EventMessage({ title, description, category, venue, date, time, hostedBy, city, hostUid, attendees, isCancelled, hostPhotoURL })
 
     try {
         await newEvent.save();
@@ -90,7 +90,9 @@ export const addComment = async (req, res) => {
 
     if (!mongoose.Types.ObjectId.isValid(id)) return res.status(404).send(`No post with id: ${id}`);
 
-    const updatedPost = await EventMessage.findByIdAndUpdate(id, { $push:{comments: req.body}, }, { new: true });
+    const post = await EventMessage.findById(id);
+
+    const updatedPost = await EventMessage.findByIdAndUpdate(id, { $push:{comments: req.body}, count: post.count + 1 }, { new: true });
     
     res.json(updatedPost);
 }
@@ -107,4 +109,49 @@ export const toggleEvent = async (req, res) => {
     const updatedPost = await EventMessage.findByIdAndUpdate(id, { isCancelled: Object.keys(req.body)[0] }, { new: true });
     
     res.json(updatedPost);
+}
+
+
+export const updatePhoto = async (req, res) => {
+
+    const { id } = req.params;
+    
+    try {
+        const {photoURL} = req.body; 
+
+        console.log(id);
+
+        if (!mongoose.Types.ObjectId.isValid(id)) return res.status(404).send(`No event with id: ${id}`);
+
+        const updatedUser = await EventMessage.updateMany({hostUid: id}, { hostPhotoURL: photoURL }, { new: true });
+
+        res.json(updatedUser);
+
+    }
+    catch(error) {
+        res.status(500).json({ message: "Something went wrong" });
+        console.log(error);
+    }
+}
+
+
+export const updateCount = async (req, res) => {
+
+    const { id } = req.params;
+    
+    try {
+
+        console.log(id);
+
+        if (!mongoose.Types.ObjectId.isValid(id)) return res.status(404).send(`No post with id: ${id}`);
+
+        const updatedUser = await EventMessage.updateMany({hostUid: id}, { count: 0 }, { new: true });
+
+        res.json(updatedUser);
+
+    }
+    catch(error) {
+        res.status(500).json({ message: "Something went wrong" });
+        console.log(error);
+    }
 }

@@ -80,7 +80,10 @@ export default function EventDetailedHeader({event, isHost, isGoing}) {
             </Segment>
 
             <Segment attached="bottom" clearing>
-                { !isHost && (
+
+                { event.isCancelled && (<Button color='red' content='Event Cancelled'/>)}
+
+                { !isHost && !event.isCancelled && (
                 <>
                 { isGoing ? (<Button onClick={cancelEvent} loading={load}>Cancel My Place</Button>) : 
                     (<Button onClick={joinEvent} loading={load} color="teal">JOIN THIS EVENT</Button>) }

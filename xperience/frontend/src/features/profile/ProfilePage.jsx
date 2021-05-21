@@ -23,7 +23,7 @@ export default function ProfilePage({match}) {
                     <Item.Image
                         avatar
                         size='small'
-                        src={ user?.result?.photoURL || photo || '/assets/user.png' }
+                        src={ photo || user?.result?.photoURL || '/assets/user.png' }
                     />
                     <Item.Content verticalAlign='middle'>
                         <Header
@@ -38,11 +38,29 @@ export default function ProfilePage({match}) {
                         basic color='red' icon='user' />
                 </Grid.Column>
 
+                
                 <Grid.Column width={4}>
 
-                 
+                    <Divider hidden />
+                    <Statistic.Group>
+                        <Statistic label='Followers' value={10} />
+                        <Statistic label='Following' value={5} />
+                    </Statistic.Group>
 
+                    <Divider />
+
+                    <Reveal animated='move'>
+
+                        <Reveal.Content visible style={{ width: '100%' }}>
+                            <Button fluid color='teal' content='Following' />
+                        </Reveal.Content>
+
+                        <Reveal.Content hidden style={{ width: '100%' }}>
+                            <Button fluid color='red' content='Unfollow' />
+                        </Reveal.Content>
+                    </Reveal>
                 </Grid.Column>
+                
 
             </Grid>
         </Segment>

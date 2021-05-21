@@ -14,6 +14,10 @@ app.use(cors());
 app.use('/posts', posts);
 app.use('/user', users);
 
+app.get('/', (req, res) => {
+    res.send('Hello to Xperince API');
+});
+
 const CONNECTION_URL = 'mongodb+srv://Jay:itsmydatabase@cluster0.ntoce.mongodb.net/myFirstDatabase?retryWrites=true&w=majority';
 
 //const databaseName = 'Xperience';

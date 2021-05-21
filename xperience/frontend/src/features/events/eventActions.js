@@ -17,13 +17,13 @@ export function loadEvents() {
                 return new Date(e.date) >= new Date();
             });
 
-            console.log(newDates);
+            //console.log(newDates);
 
             const filter = localStorage.getItem("eventFilter");
-            console.log(filter);
+            //console.log(filter);
 
             const user = JSON.parse(localStorage.getItem('profile'));
-            console.log(user.result.displayName);
+            //console.log(user?.result.displayName);
 
             switch(filter) {
 
@@ -146,6 +146,39 @@ export function toggleEvent(id, post) {
         try {
             console.log(post);
             const { data } = await api.toggleEvent(id, post);
+            dispatch({ type: UPDATE_EVENT, payload: data });
+        } 
+        catch (error) {
+            console.log(error);
+        }
+    }
+}
+
+
+
+export function updatePhoto(id, post) {
+    return async function(dispatch) {
+        
+        try {
+            console.log(id);
+            const { data } = await api.updatePhoto(id, {photoURL: post});
+
+            dispatch({ type: UPDATE_EVENT, payload: data });
+        } 
+        catch (error) {
+            console.log(error);
+        }
+    }
+}
+
+
+export function updateCount(id, post) {
+    return async function(dispatch) {
+        
+        try {
+
+            const { data } = await api.updateCount(id, post);
+
             dispatch({ type: UPDATE_EVENT, payload: data });
         } 
         catch (error) {

@@ -9,17 +9,17 @@ export default function NavBar({setFormOpen}) {
 
     const {authenticated} = useSelector((state) => state.auth);
     const [user, setUser] = useState(JSON.parse(localStorage.getItem('profile')));
+    const x = 2;
 
     return (
         <Menu inverted fixed='top'>
             <Container>
-                <Menu.Item  header>
+                <Menu.Item as={NavLink} exact to='/' header>
                     <img src="/assets/logo.png" alt="logo" style={{marginRight: 15}}/>
                     Xperince
                 </Menu.Item>
 
-                <Menu.Item as={NavLink} to='/' name='Events'/>
-
+                <Menu.Item as={NavLink} to='/events' name='Events'/>
 
                 {(authenticated || user) && 
                 <Menu.Item as={NavLink} to='/createEvent' >

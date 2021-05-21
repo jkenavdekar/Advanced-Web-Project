@@ -5,6 +5,7 @@ import PhotoWidgetDropzone from './PhotoWidgetDropzone';
 import { toast } from 'react-toastify';
 import { useDispatch } from 'react-redux';
 import { addPhoto } from '../../../features/profile/profileActions';
+import { updatePhoto } from '../../../features/events/eventActions';
 
 export default function PhotoUploadWidget({userID}) {
 
@@ -21,8 +22,11 @@ export default function PhotoUploadWidget({userID}) {
             reader.readAsDataURL(image); 
             reader.onloadend = function() { 
                 setBase(reader.result);
+                console.log(userID);
+                console.log(reader.result);
                 localStorage.setItem("userPhoto", reader.result);
                 dispatch(addPhoto(userID, reader.result));
+                dispatch(updatePhoto(userID, reader.result));
             }
             setLoading(false);
             handleCancelCrop();

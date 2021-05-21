@@ -46,6 +46,7 @@ export default function EventForm({match, history}) {
         time: '',
         hostUid: user.result._id,
         hostedBy: user.result.displayName,
+        hostPhotoURL: user?.result?.photoURL || '/assets/user.png',
         isCancelled: false
     }
 
@@ -83,7 +84,8 @@ export default function EventForm({match, history}) {
                             console.log(values);
                             selectedEvent ? dispatch(updatePost(eSelect, values)) : dispatch(createPost(values));
                             setSubmitting(false);
-                            history.push('/');
+                            history.push('/events');
+                            document.location.reload();
                         }
 
                         catch(error) {
