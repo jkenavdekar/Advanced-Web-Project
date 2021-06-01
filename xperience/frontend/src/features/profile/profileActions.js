@@ -14,7 +14,6 @@ export function addPhoto(id, user) {
         
         try {
             const { data } = await api.addPhoto(id, {photoURL: user});
-            console.log(data);
             dispatch({ type: UPDATE_PHOTO, payload: data });
         } 
         catch (error) {

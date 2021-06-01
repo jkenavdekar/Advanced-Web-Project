@@ -1,6 +1,4 @@
 import { CREATE_EVENT, DELETE_EVENT, FETCH_EVENTS, UPDATE_EVENT } from "./eventConstants";
-//import { asyncActionStart, asyncActionFinish, asyncActionError } from '../../app/async/asyncReducer';
-//import { fetchSampleData } from "../../app/api/mockApi";
 import * as api from '../../api/index.js';
 
 
@@ -70,11 +68,9 @@ export function updatePost(id, post) {
     return async function(dispatch) {
         
         try {
-            console.log(id);
-            console.log(post);
             const { data } = await api.updatePost(id, post);
         
-            dispatch({ type: UPDATE_EVENT, payload: post });
+            dispatch({ type: UPDATE_EVENT, payload: data });
         } 
         catch (error) {
             console.log(error);
@@ -87,7 +83,6 @@ export function deletePost(id) {
         try {
             await api.deletePost(id);
             dispatch({ type: DELETE_EVENT, payload: id });
-            console.log(id);
         } 
         catch (error) {
             console.log(error);
@@ -102,7 +97,6 @@ export function addAttendee(id, post) {
         
         try {
             const { data } = await api.addAttendee(id, post);
-            console.log(data);
         
             dispatch({ type: UPDATE_EVENT, payload: data });
         } 
@@ -131,7 +125,6 @@ export function addComment(id, post) {
         
         try {
             const { data } = await api.addComment(id, post);
-            console.log(data);
             dispatch({ type: UPDATE_EVENT, payload: data });
         } 
         catch (error) {
@@ -144,7 +137,6 @@ export function toggleEvent(id, post) {
     return async function(dispatch) {
         
         try {
-            console.log(post);
             const { data } = await api.toggleEvent(id, post);
             dispatch({ type: UPDATE_EVENT, payload: data });
         } 
@@ -160,7 +152,6 @@ export function updatePhoto(id, post) {
     return async function(dispatch) {
         
         try {
-            console.log(id);
             const { data } = await api.updatePhoto(id, {photoURL: post});
 
             dispatch({ type: UPDATE_EVENT, payload: data });

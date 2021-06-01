@@ -1,13 +1,9 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Button, Icon, Item, Label, List, Loader, Segment } from 'semantic-ui-react';
-import { useDispatch } from 'react-redux';
-import { deletePost, updateCount } from '../eventActions';
 import { toast } from 'react-toastify';
 
 export default function EventListItem({event, loading}) {
-
-  const dispatch = useDispatch();
 
   if(loading || !event) return <Loader content='Loading your event...' />
 
@@ -26,7 +22,7 @@ export default function EventListItem({event, loading}) {
     <Segment>
       <Item.Group>
         <Item>
-          <Item.Image size='tiny' circular src={ event?.hostPhotoURL || 'https://randomuser.me/api/portraits/women/22.jpg'} />
+          <Item.Image size='tiny' circular src={ event?.hostPhotoURL || 'https://randomuser.me/api/portraits/men/20.jpg'} />
           <Item.Content>
             <Item.Header content={event.title} />
             <Item.Description>

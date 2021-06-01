@@ -2,7 +2,7 @@ import { Field, Formik, Form, ErrorMessage } from 'formik';
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { Button, Confirm, FormField, Header, Loader, Segment} from 'semantic-ui-react';
+import { Button, Confirm, FormField, Header, Segment} from 'semantic-ui-react';
 import { createPost, toggleEvent, updatePost } from '../eventActions';
 import * as Yup from 'yup';
 import { toast } from 'react-toastify';
@@ -18,7 +18,7 @@ export default function EventForm({match, history}) {
     const selectedEvent = useSelector(state => state.event.events.find(e => e._id === match.params.id));
     //console.log(selectedEvent?.title);
 
-    const { loading, error } = useSelector((state) => state.async);
+    //const { loading, error } = useSelector((state) => state.async);
 
     var eSelect = null;
 

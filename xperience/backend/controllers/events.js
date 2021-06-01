@@ -59,7 +59,7 @@ export const addAttendee = async (req, res) => {
 
     const { id } = req.params;
 
-    console.log(req.body);
+    //console.log(req.body);
 
     if (!mongoose.Types.ObjectId.isValid(id)) return res.status(404).send(`No post with id: ${id}`);
 
@@ -72,7 +72,7 @@ export const cancelAttendee = async (req, res) => {
 
     const { id } = req.params;
 
-    console.log(req.body[0]);
+    //console.log(req.body[0]);
 
     if (!mongoose.Types.ObjectId.isValid(id)) return res.status(404).send(`No post with id: ${id}`);
 
@@ -86,7 +86,7 @@ export const addComment = async (req, res) => {
 
     const { id } = req.params;
 
-    console.log(req.body);
+    //console.log(req.body);
 
     if (!mongoose.Types.ObjectId.isValid(id)) return res.status(404).send(`No post with id: ${id}`);
 
@@ -102,7 +102,7 @@ export const toggleEvent = async (req, res) => {
 
     const { id } = req.params;
 
-    console.log(Object.keys(req.body)[0]);
+    //console.log(Object.keys(req.body)[0]);
 
     if (!mongoose.Types.ObjectId.isValid(id)) return res.status(404).send(`No post with id: ${id}`);
 
@@ -119,7 +119,7 @@ export const updatePhoto = async (req, res) => {
     try {
         const {photoURL} = req.body; 
 
-        console.log(id);
+        //console.log(id);
 
         if (!mongoose.Types.ObjectId.isValid(id)) return res.status(404).send(`No event with id: ${id}`);
 
@@ -141,7 +141,7 @@ export const updateCount = async (req, res) => {
     
     try {
 
-        console.log(id);
+        //console.log(id);
 
         if (!mongoose.Types.ObjectId.isValid(id)) return res.status(404).send(`No post with id: ${id}`);
 

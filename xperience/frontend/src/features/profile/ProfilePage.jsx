@@ -1,18 +1,12 @@
 import React, { useState } from 'react';
-import { Segment, Grid, Item, Header, Loader, Button, Statistic, Reveal, Divider } from 'semantic-ui-react';
-import { useDispatch, useSelector } from 'react-redux';
-import { listenToCurrentUserProfile } from './profileActions';
+import { Segment, Grid, Item, Header, Button, Statistic, Reveal, Divider } from 'semantic-ui-react';
 import { Link } from 'react-router-dom';
 
 export default function ProfilePage({match}) {
 
-    //const { currentUserProfile } = useSelector((state) => state.profile);
     const [user, setUser] = useState(JSON.parse(localStorage.getItem('profile')));
-    const { loading, error } = useSelector((state) => state.async);
 
     const photo = localStorage.getItem("userPhoto");
-
-    //if ((loading && !currentUserProfile) || (!currentUserProfile && !error)) return <Loader content='Loading profile...' />;
 
     return(
         <Segment>

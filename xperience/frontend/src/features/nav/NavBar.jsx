@@ -9,7 +9,6 @@ export default function NavBar({setFormOpen}) {
 
     const {authenticated} = useSelector((state) => state.auth);
     const [user, setUser] = useState(JSON.parse(localStorage.getItem('profile')));
-    const x = 2;
 
     return (
         <Menu inverted fixed='top'>

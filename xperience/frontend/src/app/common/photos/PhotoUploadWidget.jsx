@@ -22,8 +22,8 @@ export default function PhotoUploadWidget({userID}) {
             reader.readAsDataURL(image); 
             reader.onloadend = function() { 
                 setBase(reader.result);
-                console.log(userID);
-                console.log(reader.result);
+                //console.log(userID);
+                //console.log(reader.result);
                 localStorage.setItem("userPhoto", reader.result);
                 dispatch(addPhoto(userID, reader.result));
                 dispatch(updatePhoto(userID, reader.result));

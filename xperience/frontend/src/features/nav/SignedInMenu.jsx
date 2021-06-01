@@ -1,13 +1,11 @@
 import React, { useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { Link, useHistory } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { Dropdown, Image, Menu } from 'semantic-ui-react';
 import { SIGN_OUT_USER } from '../authentication/authConstants';
 
 export default function SignedInMenu() {
-
-    const {currentUserProfile} = useSelector((state) => state.profile);
 
     const [user, setUser] = useState(JSON.parse(localStorage.getItem('profile')));
 

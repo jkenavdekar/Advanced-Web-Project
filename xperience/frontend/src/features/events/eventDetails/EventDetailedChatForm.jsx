@@ -26,7 +26,6 @@ export default function EventDetailedChatForm({ eventId }) {
             try {
             chat[0].displayName = user.result.displayName;
             chat[0].description = values.comment;
-            console.log(chat);
             dispatch(addComment(eventId, chat));
             resetForm();
             } 

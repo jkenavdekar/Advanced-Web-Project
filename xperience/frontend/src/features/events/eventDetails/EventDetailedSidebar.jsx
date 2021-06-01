@@ -21,8 +21,8 @@ export default function EventDetailedSidebar({event}) {
 
                     {event?.attendees.map(attendee => (
 
-                        <Item key={attendee.id} style={{position: 'relative'}}>
-                        <Item.Image size="tiny" src={attendee.photoURL || '/assets/user.png'} />
+                        <Item key={attendee?.id} style={{position: 'relative'}}>
+                        <Item.Image size="tiny" src={'/assets/user.png'} />
                         <Item.Content verticalAlign="middle">
                             <Item.Header as="h3">
                                 <span> {attendee} </span>

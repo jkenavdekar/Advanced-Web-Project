@@ -27,8 +27,6 @@ export default function AccountPage() {
                     onSubmit= {async (values, {setSubmitting, setErrors}) => {
                         try {
                             const user = JSON.parse(localStorage.getItem('profile'));
-                            console.log(user.result._id);
-                            console.log(values.newPassword2);
                             dispatch(updatePass(user.result._id, values.newPassword2));
                             setSubmitting(false);
                             history.push('/events');

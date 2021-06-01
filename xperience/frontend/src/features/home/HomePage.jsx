@@ -3,7 +3,7 @@ import { Button, Container, Header, Icon, Image, Segment } from 'semantic-ui-rea
 
 export default function HomePage({history}) {
 
-    window.location = 'http://localhost:3000/events'
+    //window.location = 'http://localhost:3000/events'
 
     return(
         <Segment inverted textAlign='center' vertical className='masthead'>
@@ -15,7 +15,7 @@ export default function HomePage({history}) {
 
                 <Header as='h1' inverted>
                     <Image size="massive" src="/assets/logo.png" style={{marginBottom: 12}} />
-                    Xperince
+                    Xperience
                 </Header>
 
                 <Button onClick={() => history.push('/events')} size='huge' inverted>

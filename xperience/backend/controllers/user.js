@@ -82,7 +82,6 @@ export const updatePassword = async (req, res) => {
     const { id } = req.params;
     
     try {
-        console.log(Object.keys(req.body)[0]);
 
         if (!mongoose.Types.ObjectId.isValid(id)) return res.status(404).send(`No user with id: ${id}`);
 

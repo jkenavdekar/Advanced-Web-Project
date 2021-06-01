@@ -1,7 +1,6 @@
 import React from 'react';
 import {Segment, Header, Comment } from 'semantic-ui-react';
 import EventDetailedChatForm from './EventDetailedChatForm';
-import { format } from 'date-fns';
 
 export default function EventDetailedChat({event}) {
 
